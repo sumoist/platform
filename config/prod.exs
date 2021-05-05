@@ -14,12 +14,12 @@ config :platform, PlatformWeb.Endpoint,
   url: [scheme: "https", host: "platformphx.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  secret_key_base: Map.fetch!(System.get_env(), "ZQt162qBCAZGG51HScCKtHK+pO1jAE5A9+2+o7hKmnbmWa0BDSufOp3DBYUmzF8L")
+  secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
 
 # Database configuration
 config :platform, Platform.Repo,
   adapter: Ecto.Adapters.Postgres,
-  url: System.get_env("postgres://yxjbpfhqsqvbht:f70a19a533c69b4f053aca5a10535b531f5d888dee64c3fb4bfdc3c4f21d20cd@ec2-54-155-35-88.eu-west-1.compute.amazonaws.com:5432/d31j2j3f5rfc7r"),
+  url: System.get_env("DATABASE_URL"),
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
 
