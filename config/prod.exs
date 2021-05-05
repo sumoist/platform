@@ -10,8 +10,18 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :platform, PlatformWeb.Endpoint,
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  http: [:inet6, port: System.get_env("PORT") || 4000],
+  url: [scheme: "https", host: "platformphx.herokuapp.com", port: 443],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  secret_key_base: Map.fetch!(System.get_env(), "ZQt162qBCAZGG51HScCKtHK+pO1jAE5A9+2+o7hKmnbmWa0BDSufOp3DBYUmzF8L")
+
+# Database configuration
+config :platform, Platform.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  url: System.get_env("postgres://yxjbpfhqsqvbht:f70a19a533c69b4f053aca5a10535b531f5d888dee64c3fb4bfdc3c4f21d20cd@ec2-54-155-35-88.eu-west-1.compute.amazonaws.com:5432/d31j2j3f5rfc7r"),
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl: true
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -52,4 +62,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
