@@ -20,5 +20,6 @@
   "bugs": {
     "url": "https://github.com/sumoist/platform/issues"
   },
-  "homepage": "https://github.com/sumoist/platform#readme"
+  "homepage": "https://github.com/sumoist/platform#readme",
+  "build": "./node_modules/.bin/webpack --config webpack.conf.js"
 }
